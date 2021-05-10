@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>登录</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<script src="js/rem.js"></script>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="css/page.css"/>
+	<link rel="stylesheet" type="text/css" href="css/all.css"/>
+	<link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/loading.css"/>
+	<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+	<script type="text/javascript">
+		$(window).load(function(){
+			$(".loading").addClass("loader-chanage")
+			$(".loading").fadeOut(300)
+		})
+	</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+		<div class="loader-inner pacman">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+</div>
+<!--loading页结束-->
+<body>
+<div class="login clearfloat box-s">
+	<h3>员工登录</h3>
+	<div class="list clearfloat">
+		<ul>
+			<li class="ra3">
+				<p class="fl clearfloat">
+					<span class="opa5"></span>
+					<i class="iconfont icon-yonghuming"></i>
+				</p>
+				<div class="nr clearfloat fl">
+					<span class="opa3"></span>
+					<input type="text" name="" id="username" value="" placeholder="登录账号" />
+				</div>
+			</li>
+			<li class="ra3">
+				<p class="fl clearfloat">
+					<span class="opa5"></span>
+					<i class="iconfont icon-mima"></i>
+				</p>
+				<div class="nr clearfloat fl">
+					<span class="opa3"></span>
+					<input type="password" name="" id="password" value="" placeholder="登录密码" />
+				</div>
+			</li>
+			<li class="ra3">
+				<p class="fl clearfloat">
+					<span class="opa5"></span>
+					<i class="iconfont icon-yanzhengma"></i>
+				</p>
+				<div class="nr nrtwo clearfloat fl">
+					<span class="opa3"></span>
+					<input type="text" name="" id="" value="" placeholder="验证码" />
+				<span style="margin-right: 10px">	<a href="javascript:getVerifiCode()">
+						<img id="yzm_img" style="cursor:pointer;width: 75px;height: 40px;margin: 5px 0 0 5px;border-radius: 3px;" title="点击刷新验证码" src="Mcake/getVerifiCode"/>
+					</a></span>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="mima clearfloat">
+		<ul>
+			<li class="fl">
+				<div class="xuan clearfloat fl">
+					<div class="radiofour" >
+						<label>
+							<input type="checkbox" name="" value="" />
+							<div class="option"></div>
+							<span class="opt-text">记住密码</span>
+						</label>
+					</div>
+				</div>
+			</li>
+			<li class="fr">
+				<a href="verification.html">找回密码？</a>
+			</li>
+		</ul>
+	</div>
+	<div class="login-btn" >
+		<a id="btnSubmit">
+			登录
+		</a>
+		<a href="register.html" class="btn">
+			<span class="opa5"></span>
+			<samp>注册</samp>
+		</a>
+	</div>
+</div>
+<script src="js/url.js"></script>
+<script>
+	$(function () {
+		getVerifiCode();
+	})
+
+	function getVerifiCode() {
+		$("#yzm_img").prop('src',pathurl+'/store/Mcake/getVerifiCode?a='+new Date().getTime());
+		// var name = "<%=request.getParameter('text')%>";
+		// console.log(name);
+	}
+
+	// 为提交按钮添加点击事件
+	$("#btnSubmit").click(function(){
+
+		// 获取表单数据
+		var username=$("#username").val();
+		var password=$("#password").val();
+		var yzm_img=$("#yzm_img").val();
+
+
+
+
+		var params={
+			username:username,
+			password:password,
+			yzm_img:yzm_img
+
+		}
+		console.log(params);
+		// 发送AJAX请求
+		// $.post(regUrl,params,function(result){
+		// 	// 处理响应数据
+		// 	if(result.state==1000){ // 正常响应
+		// 		alert("注册成功，点击跳转登录页面");
+		// 		// 跳转登录页面
+		// 		window.location.href="login.html";
+		// 	}else{ // 异常响应
+		// 		alert(result.msg);
+		// 	}
+		// });
+
+		$.ajax({
+			url:pathurl+'/store/users/login',
+			type : 'get',
+			data:params,
+			dataType : 'json',
+
+			success:function(data){
+				if( data.state==1000)
+				{alert("登录成功");
+					window.localStorage.setItem("loginUsername", data.data.uid);
+					window.localStorage.setItem("nickname", data.data.referenceAccount);
+					window.localStorage.setItem("deptName", data.data.idCard);
+					window.localStorage.setItem("phone", data.data.phone);
+
+					console.log(window.localStorage.getItem("loginUsername"));
+					window.location.href="index.html";
+				}
+				else{
+					alert(data.msg);
+				}
+
+			},
+			error:function(data){
+				alert("账号或密码错误");
+
+
+			}
+		});
+
+	});</script>
+</body>
+</html>

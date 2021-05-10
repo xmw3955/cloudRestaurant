@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.dao.UserDao">
+    <!--结果映射:类的属性名和数据库表字段名对应的映射-->
+    <resultMap id="userMap" type="com.tedu.entity.User">
+        <!--针对主键字段的映射:column表示数据库字段名,property表示类的属性名-->
+        <id column="uid" property="uid"></id>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="phone" property="phone"></result>
+        <result column="id_card" property="idCard"></result><!--部门-->
+        <result column="reference_account" property="referenceAccount"></result><!--昵称-->
+        <result column="account" property="account"></result>
+
+    </resultMap>
+
+    <select id="getById" resultMap="userMap" parameterType="int">
+        select * from t_user where user_id=#{uid}
+    </select>
+
+    <select id="list" resultMap="userMap">
+        select * from t_user
+    </select>
+    <insert id="regist"  parameterType="User">
+        insert into t_user (username,password,phone,id_card,reference_account,account)
+        values (#{username},#{password},#{phone},#{idCard},#{referenceAccount},#{account})
+    </insert>
+    <select id="login" resultMap="userMap" parameterType="String">
+select * from t_user where username=#{username}
+    </select>
+    <update id="updateAccount" parameterType="Map">
+        update t_user set account=account-#{price} where uid=#{uid}
+    </update>
+    <select id="selectAccount" parameterType="int" resultType="int">
+        select account from t_user where uid=#{uid}
+    </select>
+    <update id="updateUser" parameterType="User">
+        update t_user set username=#{username},password=#{password},phone=#{phone},id_card=#{idCard},reference_account=#{referenceAccount}
+        where uid=#{uid}
+    </update>
+</mapper>

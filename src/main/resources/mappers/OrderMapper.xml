@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.dao.OrderDao">
+    <!--结果映射:类的属性名和数据库表字段名对应的映射-->
+    <resultMap id="orderMap" type="Order">
+        <id column="id" property="oid"></id>
+        <result column="uid" property="uid"/>
+        <result column="recv_name" property="recvName"/>
+        <result column="recv_phone" property="recvPhone"/>
+
+        <result column="price" property="price" />
+        <result column="created_time" property="date" />
+
+    </resultMap>
+    <!--保存一条订单信息-->
+    <!--保存数据同时返回数据的ID值-->
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="oid">
+        insert into t_order(
+            uid, recv_name, recv_phone,
+            price,created_time
+        )values(
+            #{uid}, #{recvName}, #{recvPhone},
+            #{price}, now())
+    </insert>
+    <select id="selectOrder" resultMap="orderMap" parameterType="int">
+        select * from t_order where uid=#{uid};
+    </select>
+    <delete id="deleteOrder" parameterType="int">
+        delete from t_order where id=#{oid}
+    </delete>
+    <!--保存一条订单详情信息-->
+<!--    <insert id="insertOrderItem">-->
+<!--        insert into t_order_item(-->
+<!--            oid, pid, num, price, image, title,-->
+<!--            created_user, modified_user,-->
+<!--            created_time, modified_time-->
+<!--        ) values(-->
+<!--            #{oid}, #{pid}, #{num}, #{price}, #{image}, #{title},-->
+<!--            #{createdUser}, #{modifiedUser},-->
+<!--            now(), now())-->
+<!--    </insert>-->
+</mapper>

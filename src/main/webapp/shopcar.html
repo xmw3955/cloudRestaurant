@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>购物车</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="js/rem.js"></script> 
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<!--header star-->
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="btn" href="javascript:history.go(-1)">
+	            <i class="iconfont icon-fanhui"></i>
+	        </a>
+	        <div class="top-sch-box top-sch-boxtwo flex-col">
+	                      购物车
+	        </div>
+	        <a class="btn" href="#">
+	            <i class="iconfont icon-lajixiang"></i>
+	        </a>
+	    </header>
+	    <!--header end-->
+
+		<div class="warp warptwo clearfloat">
+			<div class="shopcar clearfloat">
+			</div>
+		</div>
+	    <!--settlement star-->
+	    <div class="settlement clearfloat">
+	    	<div class="zuo clearfloat fl box-s">
+	    		合计：￥<span id="compute">1860</span>
+	    	</div>
+	    	<a href="javascript:void(0);" class="fl db" onclick="jump()">
+	    		立即结算
+	    	</a>
+	    </div>
+	    <!--settlement end-->
+	    
+		<!--footer star-->
+		<footer class="page-footer fixed-footer" id="footer">
+			<ul>
+				<li class="active">
+					<a href="index.html">
+						<i class="iconfont icon-shouye"></i>
+						<p>首页</p>
+					</a>
+				</li>
+				<li>
+					<a href="account.html">
+						<i class="iconfont icon-icon04"></i>
+						<p>订单</p>
+					</a>
+				</li>
+				<li>
+					<a href="shopcar.html">
+						<i class="iconfont icon-gouwuche"></i>
+						<p>购物车</p>
+					</a>
+				</li>
+				<li>
+					<a href="center.html">
+						<i class="iconfont icon-yonghuming"></i>
+						<p>我的</p>
+					</a>
+				</li>
+			</ul>
+		</footer>
+		<!--footer end-->
+	</body>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/others.js"></script>
+	<script type="text/javascript" src="js/hmt.js" ></script>
+	<script src="slick/slick.js" type="text/javascript" ></script>
+	<!--插件-->
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.jquery.min.js"></script>
+<script src="js/url.js"></script>
+<script src="js/vue-2.4.0.js"></script>
+<script type="text/javascript">
+	var cartListUrl=pathurl+"/store/carts/list";
+	var delUrl=pathurl+"/store/carts/remove";
+	var delListUrl=pathurl+"/store/carts/removeList";
+  var count=0;
+
+
+	// function initCartList(){
+	 	var params={
+	 		uid:window.localStorage.getItem("loginUsername")
+	 	}
+		$.get(cartListUrl,params,function(result){
+
+			var html='';
+			if(result.state==1000){
+				typelist=result.data;
+				count=typelist.length;
+				for (var i=0;i<typelist.length;i++){
+html=html+'<div class="list clearfloat fl" id="'+i+'">\n' +
+		'\t    \t\t\t<div class="xuan clearfloat fl">\n' +
+		'\t    \t\t\t\t<div class="radio" > \n' +
+		'\t\t\t\t\t\t    <label>\n' +
+		'\t\t\t\t\t\t        <input type="checkbox" name="sex" value="" />\n' +
+		'\t\t\t\t\t\t        <div class="option" selected="selected"></div>\n' +
+		'\t\t\t\t\t\t    </label>\n' +
+		'\t\t\t\t\t\t</div>\n' +
+		'\t    \t\t\t</div>\n' +
+		'\t    \t\t\t<a href="#">\n' +
+		'\t\t    \t\t\t<div class="tu clearfloat fl">\n' +
+		'\t\t    \t\t\t\t<span></span>\n' +
+		'\t\t    \t\t\t\t<img src="upload/'+typelist[i].image+'.jpg"/>\n' +
+		'\t\t    \t\t\t</div>\n' +
+		'\t\t    \t\t\t<div class="right clearfloat fl">\n' +
+		'\t\t    \t\t\t\t<p class="tit over">'+typelist[i].title+'</p>\n' +
+
+		'\t\t    \t\t\t\t<p class="jifen over">￥<span class="price">'+typelist[i].realPrice+'</span></p>\n' +
+		'\t\t    \t\t\t\t<div class="bottom clearfloat">\n' +
+		'\t\t    \t\t\t\t\t<div class="zuo clearfloat fl">\n' +
+		'\t\t    \t\t\t\t\t\t<ul>\n' +
+		'\t\t    \t\t\t\t\t\t\t<li class="sub"><img src="img/jian.png"/></li>\n' +
+		'\t\t    \t\t\t\t\t\t\t<li class="shop_num"><span>'+typelist[i].num+'</span></li>\n' +
+		'\t\t    \t\t\t\t\t\t\t<li class="add"><img src="img/jia.png"/></li>\n' +
+		'\t\t    \t\t\t\t\t\t</ul>\n' +
+		'\t\t    \t\t\t\t\t</div>\n' +
+		'\t\t    \t\t\t\t\t<i class="iconfont icon-lajixiang fr"></i>\n' +
+		'\t\t    \t\t\t\t</div>\n' +
+		'\t\t    \t\t\t</div>\n' +
+		'\t    \t\t\t</a>\n' +
+		'\t    \t\t</div>'}
+				$('.shopcar').append(html);
+				compute();
+				// var vue=new Vue({
+				// 	el:'#content',
+				// 	data:{
+				//       carts:result.data,
+				// 		url:"upload/",
+				// 		jpg:".jpg"
+				// 	},
+					// mounted:function(){
+					// 		$.get(cartListUrl,params,function(result){
+					// 			console.log(result.data)
+					// 	      this.data.carts.push(result.data);
+					// 			//console.log(this.carts)
+					// 		})
+					// 	//需要执行的方法可以在mounted中进行触发，其获取的数据可以赋到data中后，可以放在前面进行渲染
+					// },
+					// methods:{
+						// sub:function (index) {
+						//
+						// },
+						// add:function (index) {
+						// 	this.carts[index].num++;
+						// }
+
+				// 	}
+				// })
+
+			}else if(result.state==2007){ // 未找到记录
+				alert("您还为添加任何商品，促销火热进行中，请到商品页面选购~");
+				$("#cartBody").empty();
+			}else{
+				alert(result.msg);
+				$("#cartBody").empty();
+			}
+		})
+	$(" .sub").live("click",function(){
+		 var num=$(this).next().text()-1;
+		// alert(num);
+        if(num<0){alert("数量最小为0");num=1}
+		$(this).next().text(num);
+		compute();
+
+	});
+	$(" .add").live("click",function(){
+		var num=parseInt($(this).prev().text())+1;
+		// alert(num);
+		$(this).prev().text(num);
+		compute();
+	});
+	//计算总和
+function compute() {
+	var sum=0;
+	for (var i=0;i<count;i++)
+	{
+		sum+=parseInt($('#'+i+' .price').text())*parseInt($('#'+i+' .shop_num').text());
+	}
+	$('#compute').text(sum);
+}
+function jump() {
+   var price=$('#compute').text();
+
+    window.location.href="confirm.html?price="+price;
+}
+	// 跳转订单确认页面的方法
+	function toOrderConfirm(){
+		var cids=[];
+		//遍历所有按钮
+		for (var i = $(".ckitem").length - 1; i >= 0; i--) {
+			//如果选中
+			if ($(".ckitem")[i].checked) {
+				cids.push($($(".ckitem")[i]).attr("cid"));
+			}
+		}
+		if(cids.length==0){
+			alert("请至少选择1项要结算的商品");
+			return;
+		}
+		// 跳转订单确认页面
+		window.location.href="orderConfirm.html?cids="+cids;
+	}
+
+	function initDelButton(){
+		$(".cart-del").bind("click",function(){
+			var flag=confirm("是否确认删除该记录？");
+			if(flag){
+				var cid=$(this).attr("cid");
+				var params={cid:cid};
+				$.post(delUrl,params,function(result){
+					if(result.state==1000){
+						window.location.href="../web/cart.html";
+					}else{
+						alert(result.msg);
+					}
+				});
+			}
+		});
+	}
+
+	//批量删除按钮
+	function selDelCart() {
+		var cids=[];
+		//遍历所有按钮
+		for (var i = $(".ckitem").length - 1; i >= 0; i--) {
+			//如果选中
+			if ($(".ckitem")[i].checked) {
+				cids.push($($(".ckitem")[i]).attr("cid"));
+			}
+		}
+		if(cids.length!=0){
+			var flag=confirm("请确认是否删除所选记录？");
+			if(flag){cid
+				var params={cids:cids.toString()}
+				$.post(delListUrl,params,function(result){
+					if(result.state==1000){
+						window.location.href="../web/cart.html";
+					}else{
+						alert(result.msg);
+					}
+				})
+			}
+		}else {
+			alert("未选中任何购物车记录");
+		}
+	}
+</script>
+</html>

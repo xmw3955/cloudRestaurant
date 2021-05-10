@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>现金账户管理</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="js/rem.js"></script> 
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<!--header star-->
+		<header class="mui-bar mui-bar-nav mui-bar-nav2" id="header">
+			<a class="btn" href="javascript:history.go(-1)">
+	            <i class="iconfont icon-fanhui"></i>
+	        </a>
+	        <div class="top-sch-box top-sch-boxtwo top-sch-boxfour flex-col">
+	                      返回
+	        </div>
+	    </header>
+	    <!--header end-->
+	    
+	    <div class="warp warpthree clearfloat">
+	    	<div class="account clearfloat">
+	    		<div class="top clearfloat">
+	    			<ul>
+	    				<li class="box-s">操作时间</li>
+	    				<li>进出账</li>
+	    				<li>状态</li>
+	    			</ul>
+	    		</div>
+
+
+	    	</div>
+	    </div>
+		<footer class="page-footer fixed-footer" id="footer">
+			<ul>
+				<li class="active">
+					<a href="index.html">
+						<i class="iconfont icon-shouye"></i>
+						<p>首页</p>
+					</a>
+				</li>
+				<li>
+					<a href="account.html">
+						<i class="iconfont icon-icon04"></i>
+						<p>订单</p>
+					</a>
+				</li>
+				<li>
+					<a href="shopcar.html">
+						<i class="iconfont icon-gouwuche"></i>
+						<p>购物车</p>
+					</a>
+				</li>
+				<li>
+					<a href="center.html">
+						<i class="iconfont icon-yonghuming"></i>
+						<p>我的</p>
+					</a>
+				</li>
+			</ul>
+		</footer>
+	</body>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/others.js"></script>
+	<script type="text/javascript" src="js/hmt.js" ></script>
+	<script src="slick/slick.js" type="text/javascript" ></script>
+	<!--插件-->
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.jquery.min.js"></script>
+<script src="js/url.js"></script>
+<script>
+	// mui.init({
+	// 	swipeBack: true //启用右滑关闭功能
+	// });
+	var orderListUrl=pathurl+"/store/orders/select";
+	var backmoneyUrl=pathurl+"/store/users/updateAccount";
+	var deleteOrderUrl=pathurl+"/store/orders/delete";
+	$(function () {
+		var params={
+			uid:window.localStorage.getItem("loginUsername")
+		};
+		var html="";
+		$.post(orderListUrl,params,function(result){
+   if(result.state==1000){
+
+   	typelist=result.data;
+   	for(var i=0;i<typelist.length;i++){
+   		html+='\t<div class="list clearfloat box-s">\n' +
+				'\t    \t\t\t<div class="shang clearfloat">\n' +
+				'\t    \t\t\t\t<ul>\n' +
+				'\t\t    \t\t\t\t<li>202105</li>\n' +
+				'\t\t    \t\t\t\t<li>支出</li>\n' +
+				'\t\t    \t\t\t\t<li>待取餐</li>\n' +
+				'\t\t    \t\t\t</ul>\n' +
+				'\t    \t\t\t</div>\n' +
+				'\t    \t\t\t<div class="middle clearfloat">\n' +
+				'\t    \t\t\t\t<ul>\n' +
+				'\t    \t\t\t\t\t<li >订单号：<span class="order_id">'+typelist[i].oid+'</span></li>\n' +
+				'\t    \t\t\t\t\t<li>订餐人：'+typelist[i].recvName+'</li>\n' +
+				'\t    \t\t\t\t\t<li>联系方式：'+typelist[i].recvPhone+'</li>\n' +
+				'\t    \t\t\t\t\t<li>付款时间：'+typelist[i].date+'</li>\n' +
+				'\t    \t\t\t\t</ul>\n' +
+				'\t    \t\t\t</div>\n' +
+				'\t    \t\t\t<div class="bottom clearfloat">\n' +
+				'\t    \t\t\t\t<p><span class="fl " style="font-size: 20px;color:red;">已付款￥<span class="price" style="font-size: 20px;color:red;">'+typelist[i].price+'</span></span></p>\n' +
+				'<button class="fr btn-tk mui-btn mui-btn-blue mui-btn-outlined" id="'+i+'" type="button" style="margin-top: 10px;margin-right: 5px">申请退款</button>\n' +
+				'\t    \t\t\t</div>\n' +
+				'\t    \t\t</div>'
+	}
+   	$('.account').append(html);
+   }
+
+		})
+		$("#0").on("click", function(event){
+// 这里的this指向触发点击事件的p元素(Element)
+			alert( 1 );
+		});
+		})
+
+      $('.btn-tk').live("click",function(){
+
+		  var r=confirm("确定要退款吗？")
+		  if (r==true)
+		  { var oid=$(this).parent().prev().find('.order_id').text();
+		  console.log(oid);
+		  	var p={
+                 uid:window.localStorage.getItem("loginUsername"),
+				price:parseInt($(this).parent().find('.price').text())*(-1)
+			}
+			$.get(backmoneyUrl,p,function (data) {
+              alert("退款成功！")
+
+               $.get(deleteOrderUrl,{oid:oid},function (data) {
+				   console.log(data);
+				   location.reload();
+			   })
+			})
+			//  $(this).text("已退款");
+		  }
+		  else
+		  {
+			  console.log(2);
+		  }
+	  });
+
+
+</script>
+</html>
+

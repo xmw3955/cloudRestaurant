@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>会员注册</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="js/rem.js"></script> 
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<div class="login clearfloat box-s">
+			<h3>会员注册</h3>
+			<div class="list clearfloat">
+				<ul>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-yonghuming"></i>
+						</p>
+						<div class="nr clearfloat fl">
+							<span class="opa3"></span>
+							<input type="text" name="" id="username" value="" placeholder="用户姓名" />
+						</div>
+					</li>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-mima"></i>
+						</p>
+						<div class="nr clearfloat fl">
+							<span class="opa3"></span>
+							<input type="password" name="" id="password" value="" placeholder="登录密码" />
+						</div>
+					</li>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-shouji"></i>
+						</p>
+						<div class="nr clearfloat fl">
+							<span class="opa3"></span>
+							<input type="text" name="" id="phone" value="" placeholder="联系电话" />
+						</div>
+					</li>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-shenfenzheng"></i>
+						</p>
+						<div class="nr clearfloat fl">
+							<span class="opa3"></span>
+							<input type="text" name="" id="idCard" value="" placeholder="身份证号" />
+						</div>
+					</li>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-tuijianrenyaoqing"></i>
+						</p>
+						<div class="nr clearfloat fl">
+							<span class="opa3"></span>
+							<input type="text" name="" id="referenceAccount" value="" placeholder="推荐人账户" />
+						</div>
+					</li>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-yanzhengma"></i>
+						</p>
+						<div class="nr nrtwo clearfloat fl">
+							<span class="opa3"></span>
+							<input type="text" name="" id="" value="" placeholder="验证码" />
+							<samp class="db fr">0212</samp>
+						</div>
+					</li>
+				</ul>
+			</div>			
+			<div class="login-btn" id="btnSubmit" >
+			<a> 注册</a>	
+			</div>
+			<div class="mima mimaone clearfloat">
+				<ul>
+					<li class="fr">
+						<a href="login.html">立即登录</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script>
+	
+				var regUrl="http://127.0.0.1:8080/store/users/regist"
+			
+				
+						// 为提交按钮添加点击事件
+						$("#btnSubmit").click(function(){
+							
+							// 获取表单数据
+							var username=$("#username").val();
+							var password=$("#password").val();
+							var phone=$("#phone").val();
+							var idCard=$("#idCard").val();
+							var referenceAccount=$("#referenceAccount").val();
+				
+						
+						
+							var params={
+								username:username,
+								password:password,
+								phone:phone,
+								idCard:idCard,
+								referenceAccount:referenceAccount
+							}
+							console.log(params);
+							// 发送AJAX请求
+							$.post(regUrl,params,function(result){
+								// 处理响应数据
+								if(result.state==1000){ // 正常响应
+									alert("注册成功，点击跳转登录页面");
+									// 跳转登录页面
+									window.location.href="login.html";
+								}else{ // 异常响应
+									alert(result.msg);
+								}
+							});
+						});
+
+		</script>
+	</body>
+</html>

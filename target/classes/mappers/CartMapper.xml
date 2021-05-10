@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.dao.CartDao">
+    <resultMap id="CartMap" type="com.tedu.entity.Cart">
+        <id column="cid" property="cid"></id>
+        <result column="uid" property="uid"></result>
+        <result column="pid" property="pid"></result>
+        <result column="num" property="num"></result>
+        <result column="price" property="price"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="modified_time" property="modifiedTime"></result>
+        <result column="created_user" property="createdUser"></result>
+        <result column="modified_user" property="modifiedUser"></result>
+        <result column="image" property="image"></result>
+        <result column="title" property="title"></result>
+    </resultMap>
+<!--    <resultMap id="productMap" type="com.tedu.entity.Product">-->
+<!--        <id column="id" property="id"></id>-->
+<!--        <result column="image" property="image"></result>-->
+<!--        <result column="title" property="title"></result>-->
+<!--    </resultMap>-->
+    <resultMap id="CartVoMap" type="com.tedu.entity.vo.CartVo">
+        <result column="cid" property="cid"></result>
+        <result column="uid" property="uid"></result>
+        <result column="pid" property="pid"></result>
+        <result column="image" property="image"></result>
+        <result column="title" property="title"></result>
+        <result column="price" property="realPrice"></result>
+        <result column="num" property="num"></result>
+
+    </resultMap>
+    <insert id="save" parameterType="Cart" >
+        insert into t_cart(uid, pid, price, num, created_time,  modified_time)
+                values(#{uid}, #{pid}, #{price}, #{num},  now(),now())
+    </insert>
+    <select id="getByUidAndPid" parameterType="Cart" resultMap="CartMap">
+        select * from t_cart where uid=#{uid} and pid=#{pid}
+    </select>
+    <update id="updateNum" parameterType="Cart">
+        update t_cart set num=#{num}, modified_user=#{modifiedUser},modified_time=now() where cid=#{cid}
+    </update>
+    <select id="listCart" parameterType="int" resultMap="CartVoMap">
+        select c.cid,c.pid,p.product_img as `image`, p.product_name as `title`,
+                c.price , c.num from t_cart as `c`,
+                t_product as `p` where c.pid=p.product_id and c.uid=#{uid}
+
+    </select>
+<select id="findByCids" resultMap="CartVoMap" parameterType="int">
+    select * from t_product p,t_cart c where p.id=c.pid  and cid in
+    <foreach collection="list"  index="index" item="item" open="(" separator="," close=")">
+          #{cid}
+    </foreach>
+</select>
+</mapper>

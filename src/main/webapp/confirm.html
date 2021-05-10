@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>确认订单</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="js/rem.js"></script> 
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<!--header star-->
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="btn" href="javascript:history.go(-1)">
+	            <i class="iconfont icon-fanhui"></i>
+	        </a>
+	        <div class="top-sch-box top-sch-boxtwo flex-col">
+	                      确认订单
+	        </div>
+	    </header>
+	    <!--header end-->
+	    
+	    <div class="warp warptwo clearfloat">
+	    	<div class="confirm clearfloat">
+	    		<div class="add clearfloat box-s">
+	    			<a href="choice-address.html">
+		    			<div class="left clearfloat fl">
+		    				<i class="iconfont icon-dizhi1"></i>
+		    			</div>
+		    			<div class="middle clearfloat fl">
+		    				<p class="tit">
+								订餐人：<span class="recv_name">徐茂武</span>
+		    				</p>
+		    				<p class="fu-tit over2">
+								部门：<span class="dept_name">铜陵分公司智慧营销中心/IT支撑中心</span>
+		    				</p>
+		    			</div>
+		    			<div class="left clearfloat fr">
+		    				<i class="iconfont icon-jiantou1"></i>
+		    			</div>
+	    			</a>
+	    		</div>
+
+				<div class="gmshu clearfloat box-s fl">
+					<div class="gcontent clearfloat">
+						<p class="fl">联系方式</p>
+			     		<div class="you clearfloat fr">
+
+
+							<div><span class="recv_phone">17705621902</span></li></div>
+
+
+			     		</div>
+					</div>		     		
+		     	</div>
+		     	<div class="gmshu gmshutwo clearfloat box-s fl">
+					<div class="gcontent clearfloat">
+						<p class="fl">取餐时间</p>
+			     		<div class="you clearfloat fr">
+							<select class="mui-h5" style="margin:auto; color:red; font-size: 20px" >
+								<option value="">12:00</option>
+								<option value="1">13:00</option>
+								<option value="1">14:00</option>
+								<option value="1">15:00</option>
+								<option value="1">16:00</option>
+								<option value="1">17:00</option>
+								<option value="1">18:00</option>
+
+							</select>
+
+			     		</div>
+					</div>		     		
+		     	</div>
+
+		     	<div class="gmshu gmshuthree clearfloat box-s fl">
+					<div class="gcontent clearfloat">
+						<p class="fl">备注</p>
+			     		<div class="you clearfloat fl">
+			     			<input type="text" name="" id="" value="" class="text" placeholder="" />
+			     		</div>
+					</div>		     		
+		     	</div>
+		     	<div class="gmshu clearfloat box-s fl">
+
+		     	</div>
+		     	<div class="integral clearfloat fl box-s">
+		     		<div class="zuo clearfloat fl">
+		     			余额&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可用余额400
+		     		</div>
+		     		<div class="you clearfloat fr">
+		     			<div class="xuan clearfloat">
+		     				<div class="radiothree" > 
+							    <label>
+							        <input type="checkbox" name="fapiao" value="" />
+							        <div class="option"></div>
+							    </label>
+							</div>
+		     			</div>
+		     		</div>
+		     	</div>
+	    	</div>
+	    </div>	    
+	    
+		<!--settlement star-->
+	    <div class="settlement clearfloat">
+	    	<div class="zuo clearfloat fl box-s">
+	    		共<span>1</span>件  总金额：￥<span class="total_price">50</span>
+	    	</div>
+	    	<a href="javascript:void(0);" class="fl db" onclick="send_ajax()">
+	    		确认支付
+	    	</a>
+	    </div>
+	    <!--settlement end-->
+	    
+		<!--footer star-->
+		<footer class="page-footer fixed-footer" id="footer">
+			<ul>
+				<li class="active">
+					<a href="index.html">
+						<i class="iconfont icon-shouye"></i>
+						<p>首页</p>
+					</a>
+				</li>
+				<li>
+					<a href="account.html">
+						<i class="iconfont icon-icon04"></i>
+						<p>订单</p>
+					</a>
+				</li>
+				<li>
+					<a href="shopcar.html">
+						<i class="iconfont icon-gouwuche"></i>
+						<p>购物车</p>
+					</a>
+				</li>
+				<li>
+					<a href="center.html">
+						<i class="iconfont icon-yonghuming"></i>
+						<p>我的</p>
+					</a>
+				</li>
+			</ul>
+		</footer>
+		<!--footer end-->
+	</body>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/others.js"></script>
+	<script type="text/javascript" src="js/hmt.js" ></script>
+	<script src="slick/slick.js" type="text/javascript" ></script>
+	<!--插件-->
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.jquery.min.js"></script>
+<script src="js/url.js"></script>
+<script>
+	$(function() {
+		var path=window.location.href;
+		var index=path.lastIndexOf("?");
+		var price=0;
+		if(index!=-1){
+			var params=path.substring(index+1);
+			var array=params.split("&");
+			if(array[0].startsWith("price=")){
+				price=array[0].split("=")[1];
+			}
+		}
+		$('.total_price').text(price);
+		$('.recv_name').text(window.localStorage.getItem("nickname"));
+		$('.dept_name').text(window.localStorage.getItem("deptName"));
+		var buy_count=0;
+	})
+	var orderUrl=pathurl+"/store/orders/create";
+	function send_ajax() {
+
+		var params={
+			uid:window.localStorage.getItem("loginUsername"),
+			recv_name:$('.recv_name').text(),
+			recv_phone:$('.recv_phone').text(),
+			price:$('.total_price').text()
+		}
+		$.post(orderUrl,params,function(result){
+           if(result.state==1000){alert("购买成功")}
+           else if(result.state==500){alert("余额不足购买失败")}
+		})
+	}
+</script>
+
+</html>

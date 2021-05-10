@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.dao.CategoryDao">
+    <resultMap id="CategoryMap" type="com.tedu.entity.Category">
+        <!--针对主键字段的映射:column表示数据库字段名,property表示类的属性名-->
+        <id column="category_id" property="categoryId"></id>
+        <result column="category_name" property="categoryName"></result>
+        <result column="category_status" property="category_status"></result>
+        <result column="category_img" property="categoryImg"></result>
+        <result column="category_desc" property="categoryDesc"></result>
+<!--        <result column="is_parent" property="price"></result>-->
+
+
+    </resultMap>
+    <select id="list"  resultMap="CategoryMap">
+     select category_id ,category_name,category_img,category_desc from t_category where category_status=1
+    </select>
+
+</mapper>

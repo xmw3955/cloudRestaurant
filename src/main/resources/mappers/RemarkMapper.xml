@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  private Integer remark_id;
+    private Integer pid;
+    private Integer uid;
+    private String content;
+    private Date createdDate;
+    private String username;
+    private String img;-->
+<mapper namespace="com.tedu.dao.RemarkDao">
+    <resultMap id="RemarkMap" type="com.tedu.entity.Remark">
+        <id column="remark_id" property="remark_id"></id>
+        <result column="pid" property="pid"></result>
+        <result column="uid" property="uid"></result>
+        <result column="content" property="content"></result>
+        <result column="created_date" property="createdDate"></result>
+        <result column="username" property="username"></result>
+        <result column="img" property="img"></result>
+
+    </resultMap>
+<!--    <resultMap id="productMap" type="com.tedu.entity.Product">-->
+<!--        <id column="id" property="id"></id>-->
+<!--        <result column="image" property="image"></result>-->
+<!--        <result column="title" property="title"></result>-->
+<!--    </resultMap>-->
+
+    <insert id="saveRemark" parameterType="Remark" >
+        insert into t_remark(pid, uid, content, created_date, username,  img)
+                values(#{pid}, #{uid}, #{content}, now(), #{username},#{img})
+    </insert>
+    <select id="getAllRemark" parameterType="int" resultMap="RemarkMap">
+        select * from t_remark where  pid=#{pid}
+    </select>
+
+
+</mapper>

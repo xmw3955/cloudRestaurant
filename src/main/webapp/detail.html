@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>详情页</title>
+
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="js/rem.js"></script> 
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<!--header star-->
+	    <header class="mui-bar mui-bar-nav" id="header">
+			<a class="btn" href="javascript:history.go(-1)">
+	            <i class="iconfont icon-fanhui"></i>
+	        </a>
+	        <div class="top-sch-box top-sch-boxtwo flex-col">
+	            <ul>
+	            	<li class="cur"><a href="#">商品</a></li>
+	            	<li><a href="#">详情</a></li>
+	            	<li><a href="javascript:void(0);" id="remark">评价</a></li>
+	            </ul>
+	        </div>
+	        <a class="btn" href="#">
+	            <i class="iconfont icon-gouwuche"></i>
+	            <span>2</span>
+	        </a>
+	    </header>
+		<!--header end-->
+		
+		<div class="warp warptwo clearfloat">
+			<div class="detail clearfloat">
+				<!--banner star-->
+				<div class="banner swiper-container">
+		            <div class="swiper-wrapper">
+		                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" src="upload/21.jpg" alt=""></a></div>
+		                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" src="upload/21.jpg" alt=""></a></div>
+		                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" src="upload/21.jpg" alt=""></a></div>
+		                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" src="upload/21.jpg" alt=""></a></div>
+		            </div>
+		            <div class="swiper-pagination"></div>
+		        </div>
+				<!--banner end-->
+				<div class="top clearfloat box-s">
+					<div class="shang clearfloat">
+						<div class="zuo clearfloat fl over2 box-s" id="shop_name">
+							小米MAX智能安卓6.4吋大屏手机双卡指纹识别Xiaomi/小米 小米Max
+						</div>
+						<div class="you clearfloat fr">
+							<i class="iconfont icon-fenxiang"></i>
+							<p>销量</p>
+						</div>
+					</div>
+					<div class="xia clearfloat">
+						<p class="jifen fl box-s">今日售价<samp id="sale_price">2998</samp>元</p>
+						<span class="fr" id="sale_count">销量8件</span>
+					</div>
+				</div>
+				<div class="middle clearfloat box-s">
+					<a href="#">
+						<span class="fl">商品详情</span>
+						<i class="iconfont icon-jiantou1 fr"></i>
+					</a>
+				</div>
+				<div class="middle clearfloat box-s">
+					<a href="#">
+						<span class="fl">商品评价</span>
+						<i class="iconfont icon-jiantou1 fr"></i>
+					</a>
+				</div>
+<!--				<div class="mui-card">-->
+<!--					<div class="mui-card-header">页眉</div>-->
+<!--					<div class="mui-card-content">-->
+<!--						<div class="mui-card-content-inner">-->
+<!--							包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="mui-card-footer">页脚</div>-->
+<!--				</div>-->
+
+			</div>
+		</div>
+		
+		<!--footerone star-->
+		<div class="footerone clearfloat">
+			<div class="left clearfloat fl">
+				<ul>
+					<li>
+						<a href="#">
+							<i class="iconfont icon-shangcheng"></i>
+							<p>餐厅</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="iconfont icon-kefu1"></i>
+							<p>工作人员</p>
+						</a>
+					</li>				
+				</ul>
+			</div>
+			<div class="right clearfloat fl">
+				<span class="btn fl" onClick="toshare()">加入购物车</span>
+				<a href="confirm.html" class="btn btnone fl">立即购买</a>
+			</div>
+		</div>
+		<!--footerone end-->
+		
+		<!--这里是弹出购物车内容-->
+		<div class="am-share">
+		<div class="am-share-footer"><button class="share_btn"><img src="img/chahao.png"/></button></div>
+		  <div class="am-share-sns box-s">
+		     <div class="sdetail clearfloat">
+		     	<div class="top clearfloat">
+		     		<div class="tu clearfloat fl">
+		     			<span></span>
+		     			<img src="upload/21.jpg" class="shopcar-img"/>
+		     		</div>
+		     		<div class="you clearfloat fl">
+		     			<p class="tit" id="car_name">小米Max</p>
+		     			<span id="car_price">2998购物币+700积分</span>
+		     		</div>
+		     	</div>
+
+
+		     	<div class="bottom clearfloat">
+		     		<p class="fl">购买数量</p>
+		     		<div class="you clearfloat fr">
+		     			<ul id="app">
+		     				<li class="count_sub" @click="sub"><img src="img/jian.jpg"/></li>
+		     				<li id="num">{{count}}</li>
+		     				<li class="count_add" @click="add"><img src="img/jia.jpg"/></li>
+		     			</ul>
+		     		</div>
+		     	</div>
+		     </div>
+		  </div>
+		  <a href="javascript:void(0);" class="shop-btn db" id="addCart" >确定</a>
+		</div>
+		
+		<!--footer star-->
+		<footer class="page-footer fixed-footer" id="footer">
+			<ul>
+				<li class="active">
+					<a href="index.html">
+						<i class="iconfont icon-shouye"></i>
+						<p>首页</p>
+					</a>
+				</li>
+				<li>
+					<a href="account.html">
+						<i class="iconfont icon-icon04"></i>
+						<p>订单</p>
+					</a>
+				</li>
+				<li>
+					<a href="shopcar.html">
+						<i class="iconfont icon-gouwuche"></i>
+						<p>购物车</p>
+					</a>
+				</li>
+				<li>
+					<a href="center.html">
+						<i class="iconfont icon-yonghuming"></i>
+						<p>我的</p>
+					</a>
+				</li>
+			</ul>
+		</footer>
+		<!--footer end-->
+	</body>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/others.js"></script>
+	<script type="text/javascript" src="js/hmt.js" ></script>
+	<script src="slick/slick.js" type="text/javascript" ></script>
+	<script type="text/javascript" src="js/shopcar.js" ></script>
+	<!--插件-->
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.jquery.min.js"></script>
+<script src="js/url.js"></script>
+<script src="js/vue-2.4.0.js"></script>
+<script>
+	/*定义全的price*/
+	var price=0;
+	$(function(){
+		// 获取地址栏中的id参数
+		var path=window.location.href;
+		var index=path.lastIndexOf("?");
+		var id=10000001;
+		if(index!=-1){
+			var params=path.substring(index+1);
+			var array=params.split("&");
+			if(array[0].startsWith("id=")){
+				id=array[0].split("=")[1];
+			}
+		}
+		var prodUrl=pathurl+"/store/products/"+id+"/get";
+		$.get(prodUrl,function(result){
+			if(result.state==1000){
+				console.log(result.data);
+				typelist=result.data;
+				price=typelist.productPrice;
+				$("#shop_name").html(typelist.productName);
+				$("#car_name").html(typelist.productName);
+				$("#sale_price").html(typelist.productPrice);
+				$("#car_price").html("单价￥"+typelist.productPrice);
+				$(".swiper-lazy").attr('src','upload/'+typelist.productImg+'.jpg');
+				$(".shopcar-img").attr('src','upload/'+typelist.productImg+'.jpg');
+
+$("#sale_count").html(typelist.productSales);
+			}else{
+				alert(result.msg);
+			}
+			initCartButton(id);
+		});
+
+			$("#remark").click(function () {
+				window.location.href="/store/remark.html?pid="+id;
+			})
+
+	});
+
+	var t=new Vue({
+		el:'#app',
+		data:{
+			count:1
+		},
+		methods:{
+			add:function () {
+				this.count++;
+
+
+			},
+			sub:function () {
+				this.count--;
+				if(this.count<1)
+				{
+					this.count=1;
+					alert("数量最小为1")
+				}
+			},
+
+		}
+	})
+
+
+	function initCartButton(pid){
+		var addCartUrl=pathurl+"/store/carts/create";
+		$("#addCart").click(function(){
+
+			console.log(localStorage.getItem("loginUsername"));
+			if (localStorage.getItem("loginUsername") == undefined) {
+				alert("用户未登录")
+			} else {
+				var num = $("#num").text();
+
+				var params = {
+					pid: pid,
+					num: num,
+					uid:localStorage.getItem("loginUsername"),
+					price:price
+				}
+				$.post(addCartUrl, params, function (result) {
+					if (result.state == 1000) {
+						// $('.am-share').hide()
+						alert("购物车添加成功");
+					} else {
+						alert(result.msg);
+					}
+				})
+			}
+		});
+	}
+</script>
+</html>

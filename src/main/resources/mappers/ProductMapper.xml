@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.dao.ProductDao">
+    <resultMap id="productMap" type="com.tedu.entity.Product">
+        <!--针对主键字段的映射:column表示数据库字段名,property表示类的属性名-->
+        <id column="product_id" property="productId"></id>
+        <result column="product_name" property="productName"></result>
+        <result column="product_num" property="productNum"></result>
+        <result column="product_sales" property="productSales"></result>
+        <result column="product_desc" property="productDesc"></result>
+        <result column="product_price" property="productPrice"></result>
+        <result column="product_status" property="productStatus"></result>
+        <result column="product_img" property="productImg"></result>
+        <result column="category_id" property="categoryId"></result>
+    </resultMap>
+    <select id="getById" parameterType="int" resultMap="productMap">
+        select product_id,product_name, product_num, product_sales, product_desc,product_price,product_status,category_id,product_img  from t_product where product_id=#{productId} and product_status=1
+    </select>
+    <select id="getCountByCid" parameterType="int" resultType="int">
+        select count(*) from t_product where product_status=1 and category_id=#{categoryId}
+    </select>
+    <select id="listAllByCid" parameterType="int" resultMap="productMap">
+select  product_id,product_name, product_num, product_sales, product_desc,product_price,product_status,category_id,product_img from t_product where product_status=1 and category_id=#{categoryId}
+    </select>
+</mapper>

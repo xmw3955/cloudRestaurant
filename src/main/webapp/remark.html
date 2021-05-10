@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>评论</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="js/rem.js"></script> 
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<!--header star-->
+		<header class="mui-bar mui-bar-nav mui-bar-nav2" id="header">
+			<a class="btn" href="javascript:history.go(-1)">
+	            <i class="iconfont icon-fanhui"></i>
+	        </a>
+	        <div class="top-sch-box top-sch-boxtwo top-sch-boxfour flex-col">
+	                      返回
+	        </div>
+	    </header>
+	    <!--header end-->
+	    
+	    <div class="warp warpthree clearfloat">
+	    	<div class="account clearfloat">
+	    		<div class="top clearfloat">
+	    			<ul>
+	    				<li class="box-s">评价 5</li>
+						<li class="box-s"></li>
+	    				<li class="fr">好评度 100% ></li>
+	    			</ul>
+	    		</div>
+	    		<div class="list clearfloat box-s">
+	    			<div class="shang clearfloat">
+	    				<ul>
+		    				<li class="box-s">2016-07-22</li>
+
+		    			</ul>
+	    			</div>
+	    			<div class="middle clearfloat">
+	    				<p>一收到货就吃了一袋，3月16日的出厂日期很新鲜，因为孩子不能吃辣，所以买的是五香口味的。肉质很嫩，是纯牛肉的，口感味道还不错，下饭做下酒菜都不错，分量足，一袋半斤我和孩子一顿饭正好。价格很实惠，比在超市同类食品买得便宜。吃完还会来回购，推荐！</p>
+						<div class="tu clearfloat fl" style=""><img src="upload/4.jpg" style="width: 100px"></div>
+	    			</div>
+	    			<div class="bottom clearfloat">
+	    				<span class="fl">2016-07-10 13:29:47</span>
+	    				
+	    			</div>
+	    		</div>
+				<div class="list clearfloat box-s">
+					<div class="shang clearfloat">
+						<ul>
+							<li class="box-s">2016-07-22</li>
+
+						</ul>
+					</div>
+					<div class="middle clearfloat">
+						<p>一收到货就吃了一袋，3月16日的出厂日期很新鲜，因为孩子不能吃辣，所以买的是五香口味的。肉质很嫩，是纯牛肉的，口感味道还不错，下饭做下酒菜都不错，分量足，一袋半斤我和孩子一顿饭正好。价格很实惠，比在超市同类食品买得便宜。吃完还会来回购，推荐！</p>
+						<div class="tu clearfloat fl" style=""><img src="upload/4.jpg" style="width: 100px"></div>
+					</div>
+					<div class="bottom clearfloat">
+						<span class="fl">2016-07-10 13:29:47</span>
+
+					</div>
+				</div>
+
+
+			</div>
+			<div class="list clearfloat box-s">
+				<div class="shang clearfloat">
+					<ul >
+						<li class="box-s" style="margin: 10px;color:#fe6e1e">商品评价</li>
+
+					</ul>
+				</div>
+				<div class="middle clearfloat">
+					<div class="mui-input-row" style="margin-right: 10px;">
+						<textarea id="textarea" rows="5" placeholder="请输入你的评论"></textarea>
+						<button class="mui-btn mui-btn-danger mui-btn-outlined" id="sub_commit">提交</button>
+					</div>
+				</div>
+
+
+			</div>
+	    </div>	    
+	
+	</body>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/others.js"></script>
+	<script type="text/javascript" src="js/hmt.js" ></script>
+	<script src="slick/slick.js" type="text/javascript" ></script>
+	<!--插件-->
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<script src="js/swiper.jquery.min.js"></script>
+    <script src="js/url.js"></script>
+    <script>
+		$(function () {
+			var remarkUrl=pathurl+"/store/remark/selectAll";
+			var insertRemarkUrl=pathurl+"/store/remark/insertRemark";
+			var path=window.location.href;
+			var index=path.lastIndexOf("?");
+			var id=10000001;
+			if(index!=-1){
+				var params=path.substring(index+1);
+				var array=params.split("&");
+				if(array[0].startsWith("pid=")){
+					id=array[0].split("=")[1];
+				}
+			}
+			var p={
+				pid:id
+			}
+			var html="";
+			$.get(remarkUrl,p,function (result) {
+			var typelist=result.data;
+
+			if(result.state==1000){
+				for(var i=0;i<typelist.length;i++){
+					html+='\t<div class="list clearfloat box-s">\n' +
+							'\t    \t\t\t<div class="shang clearfloat">\n' +
+							'\t    \t\t\t\t<ul>\n' +
+							'\t\t    \t\t\t\t<li class="box-s">'+typelist[i].username+'</li>\n' +
+							'\n' +
+							'\t\t    \t\t\t</ul>\n' +
+							'\t    \t\t\t</div>\n' +
+							'\t    \t\t\t<div class="middle clearfloat">\n' +
+							'\t    \t\t\t\t<p>'+typelist[i].content+'</p>\n' +
+
+							'\t    \t\t\t</div>\n' +
+							'\t    \t\t\t<div class="bottom clearfloat">\n' +
+							'\t    \t\t\t\t<span class="fl">'+typelist[i].createdDate+'</span>\n' +
+							'\t    \t\t\t\t\n' +
+							'\t    \t\t\t</div>\n' +
+							'\t    \t\t</div>'
+				}
+				$('.account').append(html);
+			}
+			})
+
+			$('#sub_commit').click(function () {
+				var p={
+					username:window.localStorage.getItem("nickname"),
+					pid:id,
+					content:$('#textarea').val()
+				}
+				$.post(insertRemarkUrl,p,function (result) {
+					if(result.state==1000){
+					console.log(result);
+					alert("评价成功");
+					location.reload();}
+				})
+			})
+		})
+
+	</script>
+</html>
+
